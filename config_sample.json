@@ -1,0 +1,12 @@
+{
+    "web": {
+        "url": "example.missionarydinnercalendar.com",
+        "username": "uesrname",
+        "password": "password"
+    },
+    "twilio": {
+        "accountSid": "AAAAAAAAAAAAAAAAAAAAAAaaaa",
+        "authToken": "BBBBBBBBBBBBBBBBBbBBBBBBBB",
+        "testNumber": "0000000000"
+    }
+}
