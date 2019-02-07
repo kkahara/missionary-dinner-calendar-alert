@@ -5,6 +5,6 @@ This code runs on node.js platform. The app reads dinner appointments from yourw
 
 Installation:
 
-Download app.js and config.json and store in the same directory of your choice. 
+Download app.js and config_sample.json and store in the same directory of your choice. modify config_sample.json as you need and rename it to config.js 
 Execute the app by executing the following in a command line tool: node app.js
 
