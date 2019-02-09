@@ -10,7 +10,7 @@ const web_password = config.web.password;
 const twilio_accountSid = config.twilio.accountSid;
 const twilio_authToken = config.twilio.authToken;
 const twilio_testNumber = config.twilio.testNumber;
-const test_case = true;
+const test_case = false;
 
 var today = new Date();
 var tomorrow = new Date();
@@ -90,11 +90,12 @@ var request = https.get(options, function(res){
                 //companionship #1
                 if (appointmentInfo1[tomorrow.getDate()].trim() == "") { txMessage = "Sorry, nobody has signed up for dinner tomorrow :("; }
                 else {txMessage = 'ლ(´ڡ`ლ) Dinner tomorrow will be served at the ' + appointmentInfo1[tomorrow.getDate()]; }
+                if (test_case == true) {phoneNums[0]=twilio_testNumber} 
                 client.messages
                 .create({
                     body: txMessage,
                     from: '+17275133043',
-                    to: '+1' + test_case ? twilio_testNumber : phoneNums[0]
+                    to: '+1' + phoneNums[0]
                 })
                 .then(message => console.log(message.sid))
                 .done();
@@ -102,11 +103,12 @@ var request = https.get(options, function(res){
                 if(companionshipInfo1.trim() != "") {
                     if (appointmentInfo2[tomorrow.getDate()].trim() == "") { txMessage = "Sorry, nobody has signed up for dinner tomorrow :("; }
                     else {txMessage = 'ლ(´ڡ`ლ) Dinner tomorrow will be served at the ' + appointmentInfo2[tomorrow.getDate()]; }
+                    if (test_case == true) {phoneNums[1]=twilio_testNumber} 
                     client.messages
                     .create({
                         body: txMessage,
                         from: '+17275133043',
-                        to: '+1' + test_case ? twilio_testNumber : phoneNums[1]
+                        to: '+1' + phoneNums[1]
                     })
                     .then(message => console.log(message.sid))
                     .done();
@@ -123,7 +125,3 @@ var request = https.get(options, function(res){
         console.log("Got error: " + e.message);
     });
 });
-
-
-
-
