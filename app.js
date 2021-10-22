@@ -1,57 +1,57 @@
 var https = require('https');
 var btoa = require('btoa');
 var monthNum = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-var web_url = "";
-var web_username = "";
-var web_password = "";
-var twilio_accountSid = "";
-var twilio_authToken = "";
-var twilio_testNumber = "";
-var execution_hour_24h = "";
+var web_url = process.env['url'];
+var web_username = process.env['web_username'];
+var web_password = process.env['web_password'];
+var twilio_accountSid = process.env['accountSID'];
+var twilio_authToken = process.env['authToken'];
+var twilio_testNumber = process.env['testNum'];
+var execution_hour_24h = process.env['execution_hour_24h'];
 var app_env = process.env['app_env'];
 if (app_env != "prod") {app_env = "test";}
 
-const MongoClient = require("mongodb").MongoClient;
-const CONNECTION_URL =process.env['MongoDB_Connection_URL'];
-const DATABASE_NAME = "missionary-dinner-calendar";
-var database, collection;
+//const MongoClient = require("mongodb").MongoClient;
+//const CONNECTION_URL =process.env['MongoDB_Connection_URL'];
+//const DATABASE_NAME = "missionary-dinner-calendar";
+//var database, collection;
 
-MongoClient.connect(CONNECTION_URL, {useNewUrlParser: true}, function(err, client) {
-    if(err) {
-         console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
-    }
-    console.log('Connected...');
-    database = client.db(DATABASE_NAME);
-    collection = database.collection("configurations").find({}).toArray(function(err, result) {
-        if (err) throw err;
+//MongoClient.connect(CONNECTION_URL, {useNewUrlParser: true}, function(err, client) {
+    // if(err) {
+    //      console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
+    // }
+    // console.log('Connected...');
+    // database = client.db(DATABASE_NAME);
+    // collection = database.collection("configurations").find({}).toArray(function(err, result) {
+    //     if (err) throw err;
 
-        for(var i=0; i < result.length; i++) {
-            switch(result[i].name) {
-                case 'url':
-                web_url = result[i].value;
-                break;
-                case 'username':
-                web_username = result[i].value;
-                break;
-                case 'password':
-                web_password = result[i].value;
-                break;
-                case 'accountSID':
-                twilio_accountSid = result[i].value;
-                break;
-                case 'authToken':
-                twilio_authToken = result[i].value;
-                break;
-                case 'testNum':
-                twilio_testNumber = result[i].value;
-                break;
-                case 'execution_hour_24h':
-                execution_hour_24h = result[i].value;
-                break;
-                default:
-            }
-        }
-        client.close();
+    //     for(var i=0; i < result.length; i++) {
+    //         switch(result[i].name) {
+    //             case 'url':
+    //             web_url = result[i].value;
+    //             break;
+    //             case 'username':
+    //             web_username = result[i].value;
+    //             break;
+    //             case 'password':
+    //             web_password = result[i].value;
+    //             break;
+    //             case 'accountSID':
+    //             twilio_accountSid = result[i].value;
+    //             break;
+    //             case 'authToken':
+    //             twilio_authToken = result[i].value;
+    //             break;
+    //             case 'testNum':
+    //             twilio_testNumber = result[i].value;
+    //             break;
+    //             case 'execution_hour_24h':
+    //             execution_hour_24h = result[i].value;
+    //             break;
+    //             default:
+    //         }
+    //     }
+    //     client.close();
 
         var body = '';
 
@@ -175,5 +175,5 @@ MongoClient.connect(CONNECTION_URL, {useNewUrlParser: true}, function(err, clien
                 });
             });
         });
-    });
- });
+ //   });
+ //});
